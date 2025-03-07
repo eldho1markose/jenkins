@@ -1,11 +1,19 @@
 # Use official Python image
 FROM python:3.9
 
-# Copy Python script into container
-COPY hello.py /app/hello.py
+#define environment variable for working directory
+ENV HOME_DIR=/newproject
 
 # Set working directory
-WORKDIR /app
+WORKDIR $HOME_DIR
+
+# Copy Python script into container
+COPY . $HOME_DIR
+
+#create the directory inside the container
+RUN mkdir -p $HOME_DIR/app
 
 # Run the script when the container starts
-CMD ["python", "hello.py"]
+CMD ["python", "hello_world.py"]
+
+
